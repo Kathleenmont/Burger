@@ -17,11 +17,11 @@ router.get("/", function (req, res) {
     });
 });
 
-router.post("/api/burgers", function (req, res) {
-    console.log("new responce!" + res);
+router.put("/api/burgers", function (req, res) {
+    console.log("new responce!" + req);
     burger.insertOne(["burger_name", "devoured"], [req.body.burger_name, req.body.devoured], function (result) {
         res.json({ id: result.insertId });
-        // res.render("/")
+      
         // console.log("new responce!" + res)
     });
 });
@@ -29,7 +29,7 @@ router.post("/api/burgers", function (req, res) {
 router.put("/api/burgers/:id", function (req, res) {
     var condition = "id = " + req.params.id;
 
-    console.log("condidtion", condition);
+    console.log("condition", condition);
 
     burger.updateOne(
         {

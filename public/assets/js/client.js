@@ -1,8 +1,11 @@
-alert("hi")
+
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
-$(function() {
+$(function () {
+
   $(".change-eaten").on("click", function (event) {
+    // use form group for id
     var id = $(this).data("id");
+    console.log("id! " + id)
     var newEat = $(this).data("neweat");
     var newDevouredState = {
       devoured: true
@@ -13,32 +16,41 @@ $(function() {
       data: newDevouredState
     }).then(
       function () {
+
+
+        location.reload();
         console.log("changed devoured to ", newDevouredState);
-
-        location.reload();
+        console.log("id! " + id)
       }
     );
   });
 
-  $("#add-burger").on("click", function(event) {
-    event.preventDefault();
-console.log("on submit")
-    var newBurger = {
-      burger_name: $("#newBurger").val().trim(),
-      devoured: false
-    };
-    console.log(newBurger)
+  
 
-    $.ajax("/api/burgers", {
-      type: "PUT",
-      data: newBurger
-    }).then(
-      function() {
-        console.log("created new burger");
+    $(".create-form").on("submit", function (event) {
+      event.preventDefault();
+      console.log("on submit")
+      var newBurger = {
+        burger_name: $("#newBurger").val().trim(),
+        devoured: 0
+      };
+      console.log(newBurger)
 
-        location.reload();
-      }
-    );
-  });
+      // to prevent empty inputs from creating blank burgers
+      if (newBurger.burger_name) {
+
+      $.ajax("/api/burgers", {
+        type: "PUT",
+        data: newBurger
+      }).then(
+        function () {
+          console.log("created new burger");
+
+          location.reload();
+        }
+      );
+    }
+    });
+  
 });
 
