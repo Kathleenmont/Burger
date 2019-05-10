@@ -51,7 +51,6 @@ var orm = {
 
     },
 
-
     updateOne: function (table, objColVals, condition, cb) {
         var queryString = "UPDATE " + table;
         console.log("objColVals" + objColVals)
@@ -70,8 +69,15 @@ var orm = {
             cb(result);
         });
 
+    },
+
+    delete: function (table, cb) {
+        var queryString = "DELETE FROM " + table + ";"
+        connection.query(queryString, function (err, result) {
+            if (err) throw (err);
+            cb(result);
+        })
     }
 };
-
 
 module.exports = orm;

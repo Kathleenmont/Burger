@@ -46,6 +46,12 @@ router.put("/api/burgers/:id", function (req, res) {
     );
 });
 
+router.delete("/api/burgers", function (req, res) {
+    burger.delete(function(data){
+        res.status(200).end();
+    });
+})
+
 
 
 

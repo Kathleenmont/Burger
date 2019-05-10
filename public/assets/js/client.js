@@ -25,7 +25,16 @@ $(function () {
     );
   });
 
-  
+  $("#clear").on("click", function (event) {
+    $.ajax("/api/burgers", {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted all");
+        location.reload();
+      }
+    )
+  })
 
     $(".create-form").on("submit", function (event) {
       event.preventDefault();
