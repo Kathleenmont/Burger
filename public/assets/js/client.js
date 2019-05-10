@@ -8,7 +8,7 @@ $(function () {
     console.log("id! " + id)
     var newEat = $(this).data("neweat");
     var newDevouredState = {
-      devoured: true
+      devoured: 1
     };
 
     $.ajax("/api/burgers/" + id, {
@@ -24,6 +24,17 @@ $(function () {
       }
     );
   });
+
+  $("#deleteBurger1").on("click", function(event) {
+    $.ajax("/api/burgers/1", {
+      type: "DELETE"
+    }).then(
+      function() {
+        console.log("deleted burger 1");
+        location.reload();
+      }
+    )
+  })
 
   $("#clear").on("click", function (event) {
     $.ajax("/api/burgers", {
