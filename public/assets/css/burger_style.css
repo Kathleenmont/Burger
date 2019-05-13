@@ -11,6 +11,7 @@ button {
     background-color: #AA1175;
     color: whitesmoke;
     font-size: 16px;
+    margin: 10px;
 }
 button:hover {
     background-color: #0F8C8A;
