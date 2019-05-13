@@ -1,76 +1,63 @@
 
-// Make sure we wait to attach our handlers until the DOM is fully loaded.
-$(function () {
 
+$(document).ready(function () {
+
+  // on click function for devouring a burger
   $(".change-eaten").on("click", function (event) {
-    // use form group for id
+    // grabbing the id number
     var id = $(this).data("id");
-    console.log("id! " + id)
-    var newEat = $(this).data("neweat");
+    // changing devoured to be true
     var newDevouredState = {
       devoured: 1
     };
 
+    // put ajax call to update devoured and reload
     $.ajax("/api/burgers/" + id, {
       type: "PUT",
       data: newDevouredState
     }).then(
       function () {
-
-
         location.reload();
-        console.log("changed devoured to ", newDevouredState);
-        console.log("id! " + id)
       }
     );
   });
 
-  $("#deleteBurger1").on("click", function(event) {
-    $.ajax("/api/burgers/1", {
-      type: "DELETE"
-    }).then(
-      function() {
-        console.log("deleted burger 1");
-        location.reload();
-      }
-    )
-  })
-
+  // onclick event for clear all button
   $("#clear").on("click", function (event) {
+    // ajax delete all call
     $.ajax("/api/burgers", {
       type: "DELETE"
     }).then(
-      function() {
+      function () {
         console.log("deleted all");
         location.reload();
       }
     )
   })
 
-    $(".create-form").on("submit", function (event) {
-      event.preventDefault();
-      console.log("on submit")
-      var newBurger = {
-        burger_name: $("#newBurger").val().trim(),
-        devoured: 0
-      };
-      console.log(newBurger)
+  // on click event for creating new burger
+  $(".create-form").on("submit", function (event) {
+    event.preventDefault();
+    // grabs new burger name and sets devoured to false
+    var newBurger = {
+      burger_name: $("#newBurger").val().trim(),
+      devoured: 0
+    };
 
-      // to prevent empty inputs from creating blank burgers
-      if (newBurger.burger_name) {
+    // to prevent empty inputs from creating blank burgers
+    if (newBurger.burger_name) {
 
+      // ajax Put to update list with new burger and reload the page
       $.ajax("/api/burgers", {
         type: "PUT",
         data: newBurger
       }).then(
         function () {
-          console.log("created new burger");
-
           location.reload();
         }
       );
     }
-    });
-  
+  });
+
 });
 
