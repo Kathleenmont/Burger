@@ -13,6 +13,8 @@ Node.js, Express.js, Handlebars.js, MySQL, JavaScript, and jQuery.
 
 AUTHOR: Kathleen Montesano
 
+Deployed Project [HERE] [https://thawing-dusk-85754.herokuapp.com/]
+
 
 
 
